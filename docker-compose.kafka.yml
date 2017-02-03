@@ -1,0 +1,31 @@
+version: "2.0"
+services:
+  kafka:
+    image: spotify/kafka
+    ports:
+      - 9092:9092
+    environment:
+      ADVERTISED_HOST: kafka
+      ADVERTISED_PORT: 9092
+  producer:
+    build: producer
+    ports:
+      - 9081:8080
+    links:
+      - kafka:kafka
+      - kafka:zookeeper
+    environment:
+      - spring.cloud.stream.kafka.binder.brokers=kafka
+      - spring.cloud.stream.kafka.binder.zkNodes=zookeeper
+      - spring.cloud.stream.defaultBinder=kafka
+  consumer:
+    build: consumer
+    ports:
+      - 9082:8080
+    links:
+      - kafka:kafka
+      - kafka:zookeeper
+    environment:
+      - spring.cloud.stream.kafka.binder.brokers=kafka
+      - spring.cloud.stream.kafka.binder.zkNodes=zookeeper
+      - spring.cloud.stream.defaultBinder=kafka

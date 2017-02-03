@@ -1,0 +1,60 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.1.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE"
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '1.5.1.RELEASE'
+    id 'java'
+    id 'idea'
+}
+
+apply plugin: "io.spring.dependency-management"
+
+
+jar {
+    baseName = 'consumer'
+    version = '0.0.1-SNAPSHOT'
+}
+
+bootRepackage {
+    mainClass = 'com.hochzehn.Application'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-stream-dependencies:Brooklyn.SR1'
+    }
+}
+
+dependencies {
+    /* Spring Cloud */
+    compile 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
+    compile 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
+
+    compile 'org.springframework.cloud:spring-cloud-stream-binder-kafka'
+    compile 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
+
+//    /* Kafka 0.10, see http://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle/#_using_the_binder_with_apache_kafka_0_10 */
+    compile 'org.springframework.kafka:spring-kafka:1.1.1.RELEASE'
+    compile 'org.springframework.integration:spring-integration-kafka:2.1.0.RELEASE'
+    compile ('org.apache.kafka:kafka_2.11:0.10.0.0'){
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
+}
+

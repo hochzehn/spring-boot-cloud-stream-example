@@ -1,0 +1,27 @@
+version: "2.0"
+services:
+  rabbit:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 9080:15672
+  producer:
+    build: producer
+    ports:
+      - 9081:8080
+    links:
+      - rabbit:rabbit
+    environment:
+      - spring.cloud.stream.rabbit.binder.nodes=rabbit
+      - spring.rabbitmq.addresses=rabbit
+      - spring.cloud.stream.defaultBinder=rabbit
+  consumer:
+    build: consumer
+    ports:
+      - 9082:8080
+    links:
+      - rabbit:rabbit
+    environment:
+      - spring.cloud.stream.rabbit.binder.nodes=rabbit
+      - spring.rabbitmq.addresses=rabbit
+      - spring.cloud.stream.defaultBinder=rabbit

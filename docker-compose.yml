@@ -1,0 +1,10 @@
+version: "2.0"
+services:
+  producer:
+    build: producer
+    ports:
+      - 9081:8080
+  consumer:
+    build: consumer
+    ports:
+      - 9082:8080
