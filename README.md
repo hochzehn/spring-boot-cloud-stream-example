@@ -4,7 +4,7 @@ Simple hello world setup of Spring Boot with Kafka / RabbitMQ running in docker-
 ## Pre-Requisites
 * docker 
 * docker-compose 
-* java
+* Java
 * OSX (macOS) / Linux to run the commands
 
 ## Getting Started
