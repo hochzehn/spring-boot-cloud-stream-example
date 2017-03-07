@@ -50,6 +50,9 @@ dependencies {
 	compile 'org.springframework.cloud:spring-cloud-stream-binder-kafka'
 	compile 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
 
+	testCompile 'org.springframework.cloud:spring-cloud-stream-test-support'
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+
 //    /* Kafka 0.10, see http://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle/#_using_the_binder_with_apache_kafka_0_10 */
 	compile 'org.springframework.kafka:spring-kafka:1.1.1.RELEASE'
 	compile 'org.springframework.integration:spring-integration-kafka:2.1.0.RELEASE'

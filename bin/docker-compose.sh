@@ -32,6 +32,9 @@ fi
       kafka)
         DOCKER_COMPOSE_FILES="--file docker-compose.yml --file docker-compose.kafka.yml"
         ;;
+      kafka-local)
+        DOCKER_COMPOSE_FILES="--file docker-compose.yml --file docker-compose.kafka.yml --file docker-compose.kafka-local.yml"
+        ;;
       rabbit)
         DOCKER_COMPOSE_FILES="--file docker-compose.yml --file docker-compose.rabbit.yml"
   esac
